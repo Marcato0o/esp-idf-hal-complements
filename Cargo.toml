@@ -1,0 +1,30 @@
+[package]
+name = "esp-utilities"
+version = "0.1.0"
+authors = ["Francesco marcato <francescomarcato1@gmail.com>"]
+edition = "2021"
+resolver = "2"
+
+[profile.release]
+opt-level = "s"
+#panic = 'abort'
+
+[profile.dev]
+debug = true # Symbols are nice and they don't increase the size on Flash
+opt-level = "z"
+
+[features]
+pio = ["esp-idf-sys/pio"]
+
+[dependencies]
+esp-idf-sys = { version = "0.31.6", features = ["binstart", "native"] }
+esp-idf-svc = { version = "0.42.3" } # Utilities
+embedded-hal = { version = "0.2.7" }
+log = { version = "0.4.17" }
+anyhow = { version = "1.0.65" }
+#messages = { git = "ssh://git@github.com/uniuderacing/messages.git", branch = "dev"}
+messages = { path = "../messages" }
+
+[build-dependencies]
+embuild = "0.30.2"
+anyhow = "1"
